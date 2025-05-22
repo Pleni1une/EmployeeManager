@@ -8,7 +8,7 @@
     },
     "keywords": [],
     "author": "Yuan",
-    "license": "ISC",
+    "license": "WTFPL",
     "type": "commonjs",
     "dependencies": {
         "cors": "^2.8.5",
