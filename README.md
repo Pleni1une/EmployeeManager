@@ -35,19 +35,22 @@ node server.js
 ## 目录结构
 
 ```
-d:\Codes\Web\employee-manager
-├── form.xml
+employee-manager
+├── 测试用例.xml
 ├── package.json
 ├── public
 │   ├── CSS
 │   │   ├── Bootstrap
-│   │   └── Sweetalert2
-│   │       └── sweetalert2.all.min.js
+│   │   ├── Sweetalert2
+│   │   ├── HomePage.css
+│   │   └── ManagePage.css
 │   ├── imgs
 │   ├── JS
 │   │   ├── HomePage.js
 │   │   └── ManagePage.js
 │   └── Pages
+│       ├── HomePage.html   
+│       └── ManagePage.html
 ├── res
 ├── server.js
 └── README.md
