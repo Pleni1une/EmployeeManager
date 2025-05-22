@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>洪武集团</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SweetAlert2 样式和脚本 -->
+    <link href="/CSS/Sweetalert2/sweetalert2.min.css" rel="stylesheet">
+    <script src="/CSS/Sweetalert2/sweetalert2.all.min.js"></script>    
+
+    <link rel="icon" type="image/png" href="/imgs/Ming.png">
+    <link rel="stylesheet" href="/CSS/HomePage.css">
+</head>
+
+<body>
+
+    <header>
+        <img src="/imgs/Ming.png" alt="">
+        <legend>洪武集团</legend>
+        <legend style="font-size: 1.5rem; margin-left: 180px;">--始于1368年，致力于国家治理与发展</legend>
+
+        <button id="showLoginBtn">登录</button>
+        <div class="overlay" id="overlay"></div>
+    </header>
+
+    <nav>
+        <a href="#about">关于我们</a>
+        <a href="#services">核心业务</a>
+        <a href="#milestones">代表产品</a>
+        <a href="#contact">联系我们</a>
+    </nav>
+
+    <div class="card" id="about">
+        <legend>关于我们</legend>
+        <p style="text-indent: 2em; font-size: large; line-height: 1.5; margin-bottom: 5px;">
+            洪武集团，一个历史悠久、实力强大的企业集团。自1368年成立以来，我们始终秉承“以人为本，科技创新”的理念，致力于为我国的发展做出贡献。</p>
+        <p style="text-indent: 2em; font-size: large; line-height: 1.5; margin-bottom: 5px;">
+            1368年，肩负着国家治理、经济发展、文化教育等多项使命。我们致力于构建一个繁荣、稳定、和谐的社会，为百姓谋福祉。</p>
+        <img src="/imgs/AboutUs.jpg" alt="" style="max-width:100%; height:auto;">
+    </div>
+
+    <div class="card" id="services">
+        <legend>核心业务</legend>
+        <div class="services">
+            <div class="service">
+                <img src="/imgs/li1.jpg" alt="吏">
+                <h3>人员组织部</h3>
+                <p style="margin-top:10px;">负责管理文职官员。掌管文官的任免、考核、晋升、勋封、调动和工资等事务。</p>
+            </div>
+            <div class="service">
+                <img src="/imgs/hu.jpg" alt="户">
+                <h3>财政税务部</h3>
+                <p style="margin-top:10px;">管理国家财政收入与支出，确保经济稳健发展。</p>
+            </div>
+            <div class="service">
+                <img src="/imgs/bing.jpg" alt="兵">
+                <h3>军事防卫部</h3>
+                <p style="margin-top:10px;">保障国家安全与边防稳定，维护社会秩序。</p>
+            </div>
+            <div class="service">
+                <img src="/imgs/li2.jpg" alt="礼">
+                <h3>文化教育部</h3>
+                <p style="margin-top:10px;">推广儒学，提升国民素质，弘扬中华文化。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="milestones">
+        <legend>代表产品</legend>
+        <div class="milestones">
+            <div class="milestone">
+                <img src="/imgs/1.jpeg" alt="" style="width: 50%;">
+                <h3>燧发式暴雨不侵铳</h3>
+                <p style="margin-top:10px;">全球首款全天候火器</p>
+                <p style="margin-top:10px;">采用高强度铸铁与防水燧石击发装置，实现雨天/雪天99%哑火率消除</p>
+                <p style="margin-top:10px;">单兵操作射速达3发/分钟，配备可拆卸三棱刺刀模块（专利号：HM-1635）</p>
+                <p style="margin-top:10px;">抗倭战役中创下单日击沉敌舰12艘纪录，荷兰东印度公司曾试图逆向工程</p>
+            </div>
+            <div class="milestone">
+                <img src="/imgs/2.jpg" alt="" style="width: 50%;">
+                <h3>天工深层石油钻井平台</h3>
+                <p style="margin-top:10px;">比西方早200年进入石化时代</p>
+                <p style="margin-top:10px;">峨眉山系竹制井架+青铜「圜刃锉」钻头，突破60米岩层开采极限（详见《天工开物·燔石篇》）</p>
+                <p style="margin-top:10px;">分馏塔实现石油→照明油/润滑剂/军用猛火油转化率85%</p>
+                <p style="margin-top:10px;">四川嘉州油田1521年投产，年产原油480吨（同期欧洲依赖鲸油照明）</p>
+            </div>
+            <div class="milestone">
+                <img src="/imgs/3.jpg" alt="" style="width: 50%;">
+                <h3>太平种痘免疫解决方案</h3>
+                <p style="margin-top:10px;">死亡率从30%降至0.8%</p>
+                <p style="margin-top:10px;">人痘浆→低温干燥→银管封装，活性保持180天（宁国府临床数据）</p>
+                <p style="margin-top:10px;">「痘衣法」——轻度感染建立免疫（儿童适用）</p>
+                <p style="margin-top:10px;">「旱苗法」——鼻饲灭活病毒（成人快速免疫）</p>
+                <p style="margin-top:10px;">1688年通过丝绸之路技术输出，奥斯曼帝国采购价达200两白银/剂</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="contact">
+        <legend>联系我们</legend>
+        <p>地址：南京应天府中山门大街1号</p>
+        <p>电话：+86-25-12345678</p>
+        <p>邮箱：contact@hongwugroup.com</p>
+    </div>
+
+    <!-- 登录页面 -->
+    <div class="login-modal" id="loginModal">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h2>用户登录</h2>
+        <input type="text" placeholder="用户名" id="username">
+        <input type="password" placeholder="密码" id="password">
+        <button onclick="login()" class="loginbtn">登录</button>
+        <button onclick="register()" class="loginbtn">注册</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 洪武集团 版权所有</p>
+    </footer>
+
+    <script type="text/javascript" src="/JS/HomePage.js"></script>
+</body>
+
+</html>

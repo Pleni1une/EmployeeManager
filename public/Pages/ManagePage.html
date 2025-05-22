@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>人员信息管理系统</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/CSS/ManagePage.css">
+    <link rel="stylesheet" href="/CSS/Bootstrap/bootstrap.min.css">
+
+    <!-- SweetAlert2 样式和脚本 -->
+    <link href="/CSS/Sweetalert2/sweetalert2.min.css" rel="stylesheet">
+    <script src="/CSS/Sweetalert2/sweetalert2.all.min.js"></script>
+
+    <link rel="icon" type="image/png" href="/imgs/Ming.png">
+    <script type="text/javascript" src="/JS/ManagePage.js"></script>
+</head>
+
+<body>
+    <div id="btns" class="card">
+        <legend>操作菜单</legend>
+        <div class="button-group">
+            <!-- <button type="button" class="btn btn-info" onclick="showPerson()"><span
+                class="glyphicon glyphicon-qrcode"></span> 显示人员信息</button> -->
+            <button type="button" class="btn" onclick="showAddPerson()"
+                style="background-color: #F4C3A4;border-color: #CA874D">新增人员信息
+            </button>
+            <input type="file" id="importXml" accept=".xml" style="display:none" onchange="importXmlFile(event)">
+            <button type="button" class="btn" onclick="document.getElementById('importXml').click()"
+                style="background-color: #F4C3A4;border-color: #CA874D">导入人员信息
+            </button>
+            <button type="button" class="btn" onclick="exportXmlFile()"
+                style="background-color: #F4C3A4;border-color: #CA874D">导出人员信息
+            </button>
+            <button type="button" class="btn" onclick="BackToHome()"
+                style="background-color: #F4C3A4;border-color: #CA874D">返回主页面
+            </button>
+        </div>
+    </div>
+
+    <div id="search" class="card">
+        <legend>搜索功能</legend>
+        <div class="button-group">
+            <input type="text" id="searchInput" placeholder="按姓名、邮件或部门搜索">
+            <button onclick="searchPerson()" class="btn"
+                style="background-color: #F4C3A4;border-color: #CA874D; white-space: nowrap;">搜索
+            </button>
+            <button onclick="showPerson()" class="btn"
+                style="background-color: #F4C3A4;border-color: #CA874D; white-space: nowrap;">显示全部
+            </button>
+        </div>
+    </div>
+
+    <!-- 表格信息 -->
+    <div id="div1" class="card">
+        <fieldset id="field1">
+            <legend>已有人员信息</legend>
+            <table class="table table-hover" id="table1" cellspacing="2" cellpadding="2">
+                <!-- <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>籍贯</th>
+                <th colspan="2">操作</th>
+            </tr>
+            <tr>
+                <td>v.编号</td>
+                <td>v.姓名</td>
+                <td>v.性别</td>
+                <td>v.年龄</td>
+                <td>v.籍贯</td>
+                <td><button type="button" onclick="deletePerson()">删除</button></td>
+                <td><button type="button" onclick="showUpdatePerson()">修改</button></td>
+            </tr> -->
+            </table>
+        </fieldset>
+        <!-- 添加分页控制按钮 -->
+        <div id="paginationControls" style="text-align: center; margin: 1rem;">
+            <button class="btn btn-primary" onclick="prevPage()">上一页</button>
+            <span id="pageInfo" style="margin: 0 1rem;">第 1 页</span>
+            <button class="btn btn-primary" onclick="nextPage()">下一页</button>
+        </div>
+
+    </div>
+
+    <!-- 新增人员信息 -->
+    <div id="div2" class="card">
+        <fieldset id="field2">
+            <legend>新增人员信息</legend>
+            <table class="table table-hover">
+                <input type="hidden" class="form-control" name="id" id="uid" />
+                <tr>
+                    <td>姓名：</td>
+                    <td><input type="text" class="form-control" name="name" id="name" placeholder="请输入姓名" /></td>
+                </tr>
+                <tr>
+                    <td>年龄：</td>
+                    <td><input type="number" class="form-control" name="age" id="age" placeholder="请输入年龄" /></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        <select id="sex" class="form-control" required="required">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                            <option value="--请选择--" selected="selected">--请选择--</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>籍贯：</td>
+                    <td><input type="text" class="form-control" name="area" id="area" placeholder="请输入籍贯" /></td>
+                </tr>
+                <tr>
+                    <td>邮件：</td>
+                    <td><input type="text" class="form-control" name="email" id="email" placeholder="请输入邮件" /></td>
+                </tr>
+                <tr>
+                    <td>部门：</td>
+                    <td><input type="text" class="form-control" name="department" id="department" placeholder="请输入部门" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>头像：</td>
+                    <td><input type="file" id="photoInput" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" class="btn btn-primary" onclick="addPerson()">确定</button>
+                        <button type="button" class="btn btn-warning" onclick="cancel()">取消</button>
+                    </td>
+                </tr>
+            </table>
+
+        </fieldset>
+    </div>
+    <!-- 修改人员信息 -->
+    <div id="div3" class="card">
+        <fieldset id="field3">
+            <legend>修改人员信息</legend>
+            <table class="table table-hover">
+                <tr>
+                    <td>姓名：</td>
+                    <td><input type="text" class="form-control" name="name" id="uname" /></td>
+                </tr>
+                <tr>
+                    <td>年龄：</td>
+                    <td><input type="number" class="form-control" name="age" id="uage" /></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        <select id="usex" class="form-control" required="required">
+                            <option value="">--请选择--</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>籍贯：</td>
+                    <td><input type="text" class="form-control" name="area" id="uarea" /></td>
+                </tr>
+                <tr>
+                    <td>邮件：</td>
+                    <td><input type="text" class="form-control" name="email" id="uemail" placeholder="请输入邮件" /></td>
+                </tr>
+                <tr>
+                    <td>部门：</td>
+                    <td><input type="text" class="form-control" name="department" id="udepartment"
+                            placeholder="请输入部门" /></td>
+                </tr>
+                <tr>
+                    <td>头像：</td>
+                    <td>
+                        <!-- <input type="file" id="uphoto" />
+                        <img id="prevPhoto" src="/imgs/img.jpg" width="80"> -->
+                        <input type="file" id="uphoto" accept="image/*">
+                        <img id="prevPhoto" src="/imgs/img.jpg" width="80">
+                        <input type="hidden" id="photoBase64">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" class="btn btn-success" onclick="updatePerson()">确定</button>
+                        <button type="button" class="btn btn-warning" onclick="cancel()">取消</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <script>
+        window.onload = function () {
+            showPerson(p);
+            cancel();
+            fetchPersons();
+        };
+
+        function BackToHome() {
+            window.location.href = "./home";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input,
+textarea{
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* 背景模糊 */
+body::before {
+    content: "";
+    background: url("../imgs/background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    filter: blur(5px);
+}
+
+body {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.7);
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+/* 表格宽度和垂直居中样式 */
+table.table-hover {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.table-hover th,
+table.table-hover td {
+    vertical-align: middle !important;
+    /* 关键：文字上下居中 */
+    text-align: center;
+    padding: 12px;
+}
+
+/* 输入表单文字左对齐 & 垂直居中 */
+#div2 td:first-child,
+#div3 td:first-child {
+    width: 100px;
+    text-align: right;
+    vertical-align: middle;
+    /* 关键：让文字和输入框对齐 */
+    font-weight: bold;
+}
+
+/* 输入框宽度统一 */
+#div2 input[type="text"],
+#div2 input[type="number"],
+#div2 select,
+#div3 input[type="text"],
+#div3 input[type="number"],
+#div3 select {
+    width: 100%;
+}
+
+/* 按钮样式 */
+button.btn {
+    margin: 0;
+}
+
+/* 仅适用于修改卡片统一样式 */
+.card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin: 2rem auto !important;
+    width: 90%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    border: 2px solid #B06537;
+}
+
+/* 仅适用于修改以下三部分背景样式 */
+#div1,
+#div2,
+#div3 {
+    border: 2px solid #B06537;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    max-width: 1000px;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+/* 仅适用于修改以下两个部分背景样式 */
+#btns.card,
+#search.card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 2rem;
+    margin: 2rem auto !important;
+    width: 90%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    border: 2px solid #B06537;
+}
+
+/* 鼠标悬停微动画 */
+.card:hover {
+    transform: scale(1.01);
+}
+
+/* 标题统一样式 */
+.card legend {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #B06537;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #B06537;
+    margin-bottom: 1rem;
+}
+
+/* 表单字段左侧垂直居中对齐 */
+.card td:first-child {
+    width: 100px;
+    text-align: right;
+    vertical-align: middle;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 输入框统一样式 */
+.card input[type="text"],
+.card input[type="number"],
+.card select,
+.card input[type="file"] {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border 0.3s ease;
+}
+
+/* 输入框高亮 */
+.card input:focus,
+.card select:focus {
+    border-color: #B06537;
+    outline: none;
+}
+
+/* 按钮排布优化 */
+.card .btn {
+    margin: 0;
+}
+
+/* TODO: 偶先失效 */
+.card .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 可选按钮样式 */
+button.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+}

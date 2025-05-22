@@ -1,0 +1,19 @@
+{
+    "name": "employee-manager",
+    "version": "1.0.0",
+    "description": "一个简单的基于nodejs的员工管理系统",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Yuan",
+    "license": "ISC",
+    "type": "commonjs",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^5.1.0",
+        "sqlite3": "^5.1.6",
+        "sweetalert": "^2.1.2"
+    }
+}
