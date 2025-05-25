@@ -69,7 +69,7 @@ window.onload = function () {
 };
 
 
-/**显示新增人员信息**/
+// 显示新增人员信息
 function showAddPerson() {
     var div3 = document.getElementById("div3");
     div3.style = "display: none;";
@@ -77,7 +77,7 @@ function showAddPerson() {
     div2.style = "margin: 2.25rem;";
 }
 
-/**新增人员信息**/
+// 新增人员信息
 function addPerson() {
     var a = {};
     a.name = document.getElementById("name").value;
@@ -113,7 +113,7 @@ function addPerson() {
         .catch(err => console.error("新增失败", err));
 }
 
-/**根据id删除人员信息**/
+// 根据id删除人员信息
 function deletePerson(id) {
     Swal.fire({
         title: '确定删除？',
@@ -143,7 +143,7 @@ function deletePerson(id) {
 }
 
 
-/**根据id修改人员信息**/
+// 根据id修改人员信息
 function showUpdatePerson(id) {
 
     // 向后端请求该 id 的人员信息
@@ -206,7 +206,6 @@ function showUpdatePerson(id) {
         reader.onload = function () {
             const base64Str = reader.result;
             document.getElementById("prevPhoto").src = base64Str;
-
             // 把 base64 存储到一个隐藏字段或变量中，用于提交
             document.getElementById("photoBase64").value = base64Str;
         };
@@ -215,7 +214,7 @@ function showUpdatePerson(id) {
 
 }
 
-/**修改人员信息**/
+// 修改人员信息
 function updatePerson() {
     var id = document.getElementById("uid").value;
     var a = {
@@ -244,7 +243,7 @@ function updatePerson() {
         .catch(err => console.error("修改失败", err));
 }
 
-/**搜索人员信息**/
+// 搜索人员信息
 function searchPerson() {
     const keyword = document.getElementById("searchInput").value.trim();
     console.log("搜索关键字:", keyword);
@@ -383,7 +382,7 @@ function exportXmlFile() {
 }
 
 
-/**取消按钮，隐藏表单**/
+// 取消按钮，隐藏表单
 function cancel() {
     //隐藏新增人员信息界面
     var div2 = document.getElementById("div2");
