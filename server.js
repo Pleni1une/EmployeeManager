@@ -1,19 +1,23 @@
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const cors = require('cors');
-const app = express();
-const path = require('path');
-const port = 2077;
+import express from 'express';
+import sqlite3Package from 'sqlite3';
+import cors from 'cors';
+import open from 'open';
+import path from 'path';
+import { performance } from 'perf_hooks';
+import { fileURLToPath } from 'url';
 
-// 无关紧要模块
-const { performance } = require('perf_hooks');
+const port = 2077;
+const app = express();
 const startTime = performance.now();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const sqlite3 = sqlite3Package.verbose();
 
 // 启动项
 app.use(cors());
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/home', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/Pages/HomePage.html'));
 });
@@ -153,8 +157,6 @@ app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'public/Pages/404.html'));
 });
 
-
-
 // 启动服务
 // 显式绑定本机局域网 IP
 //${host}
@@ -166,4 +168,6 @@ app.listen(port, () => {
     const endTime = performance.now();
     const duration = endTime - startTime;
     console.log(`\x1b[42;30m DONE \x1b[40;32m 耗时 ${duration.toFixed(2)} 毫秒 \x1b[0m`);
+
+    open(`http://localhost:${port}`);
 });
