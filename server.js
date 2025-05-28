@@ -169,7 +169,7 @@ app.listen(port, host, () => {
     const duration = endTime - startTime;
     console.log(`\x1b[42;30m DONE \x1b[40;32m 耗时 ${duration.toFixed(2)} 毫秒 \x1b[0m`);
     //自动打开浏览器
-    // open(`http://${host}:${port}`);
+    open(`http://${host}:${port}`);
 });
 
 //导出host和port

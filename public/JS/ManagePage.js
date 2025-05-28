@@ -330,7 +330,7 @@ function importXmlFile(event) {
         Promise.all(promises)
             .then(() => {
                 Swal.fire('成功', 'XML 数据导入成功！', 'success');
-                showPerson(); // 刷新人员展示
+                fetchPersons(); // 重新拉取最新数据并刷新页面
             })
             .catch(err => {
                 console.error("导入出错:", err);
