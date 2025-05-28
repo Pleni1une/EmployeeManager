@@ -126,6 +126,10 @@ function addPerson() {
         .then(data => {
             console.log("新增成功，id=", data.id);
             fetchPersons();  // 重新拉取列表刷新页面
+            Swal.fire({
+                icon: 'success',
+                title: '添加成功',
+            });
         })
         .catch(err => console.error("新增失败", err));
 }
@@ -411,6 +415,10 @@ function fetchPersons() {
         });
 }
 
+function backhome(){
+    window.location.href = '/home'
+}
+
 window.onload = function () {
     fetchPersons();
     cancel();
@@ -432,5 +440,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnCancelEdit")?.addEventListener("click", cancel);
     document.getElementById("btnExportXml")?.addEventListener("click", exportXmlFile);
     document.getElementById("importXml")?.addEventListener("change", importXmlFile);
+    document.getElementById("BackToHome")?.addEventListener("click",backhome);
 });
 
