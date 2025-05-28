@@ -30,7 +30,7 @@ npm install
 node server.js
 ```
 
-6. 打开浏览器并访问 `http://localhost:2077`。
+6. 打开浏览器并访问bash中提示的地址。
 
 ## 目录结构
 
@@ -48,10 +48,12 @@ employee-manager
 │   ├── JS
 │   │   ├── HomePage.js
 │   │   └── ManagePage.js
-│   └── Pages
-│       ├── HomePage.html   
-│       └── ManagePage.html
-├── res
+│   ├──Pages
+│   │   ├── HomePage.html   
+│   │   ├──ManagePage.html
+│   │   └──404.html
+│   ├──config.js
+│   └──person.db
 ├── server.js
 └── README.md
 ```
