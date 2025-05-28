@@ -1,5 +1,6 @@
-var p = [];
+import { host, port } from '../config.js';
 
+var p = [];
 // 新增变量存储当前显示列表，初始为完整列表
 var currentList = p.slice();
 // 分页相关变量
@@ -36,8 +37,9 @@ function renderPage() {
             "<td>" + a.area + "</td>" +
             "<td>" + (a.email || "") + "</td>" +
             "<td>" + (a.department || "") + "</td>" +
-            "<td><button type='button' class='btn btn-success' onclick='showUpdatePerson(" + a.id + ")'>修改</button> &nbsp;&nbsp;<button type='button' class='btn btn-danger' onclick='deletePerson(" + a.id + ")'>删除</button></td>" +
-            "</tr>";
+            "<td><button type='button' class='btn btn-success' data-id='" + a.id + "'>修改</button> &nbsp;&nbsp;" +
+            "<button type='button' class='btn btn-danger' data-id='" + a.id + "'>删除</button></td>";
+        "</tr>";
     }
     table1.innerHTML = str;
 
@@ -46,6 +48,21 @@ function renderPage() {
 
     document.querySelector("#paginationControls button:nth-child(1)").disabled = (currentPage === 1);
     document.querySelector("#paginationControls button:nth-child(3)").disabled = (currentPage === totalPages);
+
+    // 事件委托绑定 修改/删除按钮点击事件
+    document.getElementById("table1").addEventListener("click", function (e) {
+        if (e.target.tagName === "BUTTON") {
+            const btn = e.target;
+            const action = btn.textContent.trim();
+            const id = parseInt(btn.getAttribute("data-id"));
+            if (action === "修改") {
+                showUpdatePerson(id);
+            } else if (action === "删除") {
+                deletePerson(id);
+            }
+        }
+    });
+
 }
 
 function nextPage() {
@@ -100,7 +117,7 @@ function addPerson() {
         return;
     }
 
-    fetch('http://localhost:2077/persons', {
+    fetch(`http://${host}:${port}/persons`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(a)
@@ -126,7 +143,7 @@ function deletePerson(id) {
         cancelButtonText: '取消'
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`http://localhost:2077/persons/${id}`, { method: 'DELETE' })
+            fetch(`http://${host}:${port}/persons/${id}`, { method: 'DELETE' })
                 .then(res => res.json())
                 .then(data => {
                     console.log("删除成功", data);
@@ -142,12 +159,10 @@ function deletePerson(id) {
 
 }
 
-
 // 根据id修改人员信息
 function showUpdatePerson(id) {
-
     // 向后端请求该 id 的人员信息
-    fetch(`http://localhost:2077/persons/${id}`)
+    fetch(`http://${host}:${port}/persons/${id}`)
         .then(res => {
             if (!res.ok) throw new Error("无法获取人员信息");
             return res.json();
@@ -181,13 +196,6 @@ function showUpdatePerson(id) {
 
     //TODO:Base64编码与解码头像上传预览模式
     // 监听头像上传预览
-    // document.getElementById("uphoto").addEventListener("change", function (e) {
-    //     var file = e.target.files[0];
-    //     if (file) {
-    //         var url = URL.createObjectURL(file);
-    //         document.getElementById("prevPhoto").src = url;
-    //     }
-    // });
     document.getElementById("uphoto").addEventListener("change", function (e) {
         const file = e.target.files[0];
         if (!file) return;
@@ -229,7 +237,7 @@ function updatePerson() {
 
     };
 
-    fetch(`http://localhost:2077/persons/${id}`, {
+    fetch(`http://${host}:${port}/persons/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(a)
@@ -248,7 +256,7 @@ function searchPerson() {
     const keyword = document.getElementById("searchInput").value.trim();
     console.log("搜索关键字:", keyword);
 
-    let url = "http://localhost:2077/persons";
+    let url = `http://${host}:${port}/persons`;
     if (keyword !== "") {
         url += `?keyword=${encodeURIComponent(keyword)}`;
     }
@@ -302,7 +310,7 @@ function importXmlFile(event) {
             };
 
             // 发送 POST 请求导入到数据库
-            const promise = fetch('http://localhost:2077/persons', {
+            const promise = fetch(`http://${host}:${port}/persons`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -371,7 +379,6 @@ function exportXmlFile() {
     doc.appendChild(root);
     const serializer = new XMLSerializer();
     const xmlStr = serializer.serializeToString(doc);
-
     const blob = new Blob([xmlStr], { type: "application/xml" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -393,7 +400,7 @@ function cancel() {
 }
 
 function fetchPersons() {
-    fetch('http://localhost:2077/persons')
+    fetch(`http://${host}:${port}/persons`)
         .then(res => res.json())
         .then(data => {
             p = data;      // 把从数据库获取的人员列表赋值给p
@@ -406,4 +413,24 @@ function fetchPersons() {
 
 window.onload = function () {
     fetchPersons();
+    cancel();
 };
+
+//TODO 函数绑定
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("btnImportXml")?.addEventListener("click", () => {
+        document.getElementById("importXml").click();
+    });
+    document.getElementById("btnShowAddPerson")?.addEventListener("click", showAddPerson);
+    document.getElementById("btnAddPerson")?.addEventListener("click", addPerson);
+    document.getElementById("btnUpdatePerson")?.addEventListener("click", updatePerson);
+    document.getElementById("btnSearchPerson")?.addEventListener("click", searchPerson);
+    document.getElementById("btnShowAll")?.addEventListener("click", () => showPerson());
+    document.getElementById("btnPrevPage")?.addEventListener("click", prevPage);
+    document.getElementById("btnNextPage")?.addEventListener("click", nextPage);
+    document.getElementById("btnCancelAdd")?.addEventListener("click", cancel);
+    document.getElementById("btnCancelEdit")?.addEventListener("click", cancel);
+    document.getElementById("btnExportXml")?.addEventListener("click", exportXmlFile);
+    document.getElementById("importXml")?.addEventListener("change", importXmlFile);
+});
+

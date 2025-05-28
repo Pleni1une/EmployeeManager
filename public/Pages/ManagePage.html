@@ -14,26 +14,24 @@
     <script src="/CSS/Sweetalert2/sweetalert2.all.min.js"></script>
 
     <link rel="icon" type="image/png" href="/imgs/Ming.png">
-    <script type="text/javascript" src="/JS/ManagePage.js"></script>
+    <script type="module" src="/JS/ManagePage.js"></script>
 </head>
 
 <body>
     <div id="btns" class="card">
         <legend>操作菜单</legend>
         <div class="button-group">
-            <!-- <button type="button" class="btn btn-info" onclick="showPerson()"><span
-                class="glyphicon glyphicon-qrcode"></span> 显示人员信息</button> -->
-            <button type="button" class="btn" onclick="showAddPerson()"
+            <button type="button" class="btn" id="btnShowAddPerson"
                 style="background-color: #F4C3A4;border-color: #CA874D">新增人员信息
             </button>
-            <input type="file" id="importXml" accept=".xml" style="display:none" onchange="importXmlFile(event)">
-            <button type="button" class="btn" onclick="document.getElementById('importXml').click()"
+            <input type="file" id="importXml" accept=".xml" style="display:none">
+            <button type="button" class="btn" id="btnImportXml"
                 style="background-color: #F4C3A4;border-color: #CA874D">导入人员信息
             </button>
-            <button type="button" class="btn" onclick="exportXmlFile()"
+            <button type="button" class="btn" id="btnExportXml"
                 style="background-color: #F4C3A4;border-color: #CA874D">导出人员信息
             </button>
-            <button type="button" class="btn" onclick="BackToHome()"
+            <button type="button" class="btn" id="BackToHome"
                 style="background-color: #F4C3A4;border-color: #CA874D">返回主页面
             </button>
         </div>
@@ -43,10 +41,10 @@
         <legend>搜索功能</legend>
         <div class="button-group">
             <input type="text" id="searchInput" placeholder="按姓名、邮件或部门搜索">
-            <button onclick="searchPerson()" class="btn"
+            <button id="btnSearchPerson" class="btn"
                 style="background-color: #F4C3A4;border-color: #CA874D; white-space: nowrap;">搜索
             </button>
-            <button onclick="showPerson()" class="btn"
+            <button id="btnShowAll" class="btn"
                 style="background-color: #F4C3A4;border-color: #CA874D; white-space: nowrap;">显示全部
             </button>
         </div>
@@ -57,30 +55,13 @@
         <fieldset id="field1">
             <legend>已有人员信息</legend>
             <table class="table table-hover" id="table1" cellspacing="2" cellpadding="2">
-                <!-- <tr>
-                <th>编号</th>
-                <th>姓名</th>
-                <th>性别</th>
-                <th>年龄</th>
-                <th>籍贯</th>
-                <th colspan="2">操作</th>
-            </tr>
-            <tr>
-                <td>v.编号</td>
-                <td>v.姓名</td>
-                <td>v.性别</td>
-                <td>v.年龄</td>
-                <td>v.籍贯</td>
-                <td><button type="button" onclick="deletePerson()">删除</button></td>
-                <td><button type="button" onclick="showUpdatePerson()">修改</button></td>
-            </tr> -->
             </table>
         </fieldset>
         <!-- 添加分页控制按钮 -->
         <div id="paginationControls" style="text-align: center; margin: 1rem;">
-            <button class="btn btn-primary" onclick="prevPage()">上一页</button>
+            <button class="btn btn-primary" id="btnPrevPage">上一页</button>
             <span id="pageInfo" style="margin: 0 1rem;">第 1 页</span>
-            <button class="btn btn-primary" onclick="nextPage()">下一页</button>
+            <button class="btn btn-primary" id="btnNextPage">下一页</button>
         </div>
 
     </div>
@@ -128,8 +109,8 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="button" class="btn btn-primary" onclick="addPerson()">确定</button>
-                        <button type="button" class="btn btn-warning" onclick="cancel()">取消</button>
+                        <button type="button" class="btn btn-primary" id="btnAddPerson">确定</button>
+                        <button type="button" class="btn btn-warning" id="btnCancelAdd">取消</button>
                     </td>
                 </tr>
             </table>
@@ -175,8 +156,6 @@
                 <tr>
                     <td>头像：</td>
                     <td>
-                        <!-- <input type="file" id="uphoto" />
-                        <img id="prevPhoto" src="/imgs/img.jpg" width="80"> -->
                         <input type="file" id="uphoto" accept="image/*">
                         <img id="prevPhoto" src="/imgs/img.jpg" width="80">
                         <input type="hidden" id="photoBase64">
@@ -184,25 +163,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="button" class="btn btn-success" onclick="updatePerson()">确定</button>
-                        <button type="button" class="btn btn-warning" onclick="cancel()">取消</button>
+                        <button type="button" class="btn btn-success" id="btnUpdatePerson">确定</button>
+                        <button type="button" class="btn btn-warning" id="btnCancelEdit">取消</button>
                     </td>
                 </tr>
             </table>
         </fieldset>
     </div>
-
-    <script>
-        window.onload = function () {
-            showPerson(p);
-            cancel();
-            fetchPersons();
-        };
-
-        function BackToHome() {
-            window.location.href = "./home";
-        }
-    </script>
 </body>
-
 </html>

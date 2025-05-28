@@ -1,3 +1,5 @@
+import { host, port } from '../config.js';
+
 //登录界面 
 const showLoginBtn = document.getElementById('showLoginBtn');
 const overlay = document.getElementById('overlay');
@@ -19,8 +21,8 @@ overlay.addEventListener('click', () => {
     loginModal.style.display = 'none';
 });
 
-// 登录函数
-const apiBase = 'http://localhost:2077';
+document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('registerBtn').addEventListener('click', register);
 
 // 登录函数
 async function login() {
@@ -37,7 +39,7 @@ async function login() {
     }
 
     try {
-        const res = await fetch(`${apiBase}/accounts`);
+        const res = await fetch(`http://${host}:${port}/accounts`);
         const accounts = await res.json();
 
         if (!Array.isArray(accounts) || accounts.length === 0) {
@@ -92,7 +94,7 @@ async function register() {
     }
 
     try {
-        const res = await fetch(`${apiBase}/accounts`);
+        const res = await fetch(`http://${host}:${port}/accounts`);
         const accounts = await res.json();
 
         if (Array.isArray(accounts) && accounts.length > 0) {
@@ -104,7 +106,7 @@ async function register() {
             return;
         }
 
-        const regRes = await fetch(`${apiBase}/register`, {
+        const regRes = await fetch(`http://${host}:${port}/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -136,4 +138,3 @@ async function register() {
         });
     }
 }
-

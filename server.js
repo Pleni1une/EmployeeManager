@@ -5,6 +5,8 @@ import open from 'open';
 import path from 'path';
 import { performance } from 'perf_hooks';
 import { fileURLToPath } from 'url';
+import ip from 'ip';
+import fs from 'fs';
 
 const port = 2077;
 const app = express();
@@ -29,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 // 连接数据库
-const db = new sqlite3.Database('./res/person.db', (err) => {
+const db = new sqlite3.Database('./public/person.db', (err) => {
     if (err) return console.error(err.message);
     console.log('\x1b[42;30m DONE \x1b[40;32m SQLite 数据库已连接 \x1b[0m');
 });
@@ -159,15 +161,18 @@ app.use((req, res) => {
 
 // 启动服务
 // 显式绑定本机局域网 IP
-//${host}
-// const host = '0.0.0.0'; 
+const host = ip.address(); 
 
-app.listen(port, () => {
-// app.listen(port, host, () => {
-    console.log(`\x1b[2J\x1b[42;30m DONE \x1b[40;32m 服务运行于\x1b[40;33m http://localhost:${port} \x1b[0m`);
+app.listen(port, host, () => {
+    console.log(`\x1b[2J\x1b[42;30m DONE \x1b[40;32m 服务运行于\x1b[40;33m http://${host}:${port} \x1b[0m`);
     const endTime = performance.now();
     const duration = endTime - startTime;
     console.log(`\x1b[42;30m DONE \x1b[40;32m 耗时 ${duration.toFixed(2)} 毫秒 \x1b[0m`);
-
-    open(`http://localhost:${port}`);
+    //自动打开浏览器
+    // open(`http://${host}:${port}`);
 });
+
+//导出host和port
+const configContent = `export const host = "${host}";
+export const port = ${port};`;
+fs.writeFileSync('./public/config.js', configContent); 

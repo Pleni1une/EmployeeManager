@@ -31,3 +31,6 @@ docs/build/
 # 忽略系统文件
 .DS_Store
 Thumbs.db
+
+# 忽略备份文件
+backup
