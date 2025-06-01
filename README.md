@@ -48,12 +48,12 @@ employee-manager
 │   ├── JS
 │   │   ├── HomePage.js
 │   │   └── ManagePage.js
-│   ├──Pages
+│   ├── Pages
 │   │   ├── HomePage.html   
-│   │   ├──ManagePage.html
-│   │   └──404.html
-│   ├──config.js
-│   └──person.db
+│   │   ├── ManagePage.html
+│   │   └── 404.html
+│   ├── config.js
+│   └── person.db
 ├── server.js
 └── README.md
 ```
