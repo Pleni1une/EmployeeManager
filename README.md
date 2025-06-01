@@ -13,7 +13,7 @@
 
 1. 确保您的系统已安装Node.js。
 2. 克隆或下载此项目到本地。
-3. 初始化nodejs项目
+3. 初始化Node项目
 
 ```bash
 npm init -y
